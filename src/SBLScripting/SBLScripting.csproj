@@ -5,6 +5,14 @@
     <AssemblyName>sblscript</AssemblyName>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\artifacts</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\artifacts</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Irony.NetCore" Version="1.1.11" />
   </ItemGroup>

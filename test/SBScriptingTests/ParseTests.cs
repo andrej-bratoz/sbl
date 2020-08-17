@@ -118,5 +118,41 @@ namespace SBScriptingTests
             //
             Xunit.Assert.True(result);
         }
+
+        [Fact]
+        public void ParseTest10()
+        {
+            //
+            var src = "fn x() { while(x < 1) {} }";
+            //
+            var compiler = new SBLCompiler();
+            var result = compiler.Parse(src);
+            //
+            Xunit.Assert.True(result);
+        }
+
+        [Fact]
+        public void ParseTest11()
+        {
+            //
+            var src = "fn x(int k) { while(x < 1) {} }";
+            //
+            var compiler = new SBLCompiler();
+            var result = compiler.Parse(src);
+            //
+            Xunit.Assert.True(result);
+        }
+
+        [Fact]
+        public void ParseTest12()
+        {
+            //
+            var src = "fn x(int k, int j) { while(x < 1) {} }";
+            //
+            var compiler = new SBLCompiler();
+            var result = compiler.Parse(src);
+            //
+            Xunit.Assert.True(result);
+        }
     }
 }

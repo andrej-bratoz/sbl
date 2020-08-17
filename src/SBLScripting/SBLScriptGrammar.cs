@@ -114,16 +114,14 @@ namespace SBLScripting
             FunctionCallArgumentList.Rule = Expression | Expression + "," + FunctionCallArgumentList;
             FunctionCall.Rule = Identifier + "(" + ")" | Identifier + "(" + FunctionCallArgumentList + ")";
             //
-            FunctionDefinition.Rule = "fn" + Identifier + "(" + ")" |
-                                      "fn" + Identifier + "(" + FunctionDefinitionArgument + ")";
+           
             //
             FunctionDefinitionArgument.Rule = TypeName + BaseIdentifier |
                                               TypeName + BaseIdentifier + "," + FunctionDefinitionArgument;
             //
-            TypeName.Rule = ToTerm("bool") | "int" | "float" | "decimal" | "string" | "struct" + Identifier |
-                            "class" + Identifier;
+            TypeName.Rule = ToTerm("bool") | "int" | "float" | "decimal" | "string" | "struct" + Identifier | "class" + Identifier;
 
-            Statement.Rule = MetaStatement | VarDeclaration | ForStatement | AssignmentStatement | ForEachStatement | WhileStatement;
+            Statement.Rule = MetaStatement | VarDeclaration | ForStatement | AssignmentStatement | ForEachStatement | WhileStatement | FunctionDefinition;
             StatementGroup.Rule = Statement | StatementGroup + Statement;
             //
             MetaStatement.Rule = "@" + BaseIdentifier + BaseIdentifier |
@@ -132,6 +130,11 @@ namespace SBLScripting
 
             VarDeclaration.Rule = "var" + Identifier + "=" + Expression + ";" | 
                                   "var" + Identifier + "=" + "new" + FunctionCall + ";";
+
+            FunctionDefinition.Rule = "fn" + Identifier + "(" + ")" + "{" + "}" |
+                                      "fn" + Identifier + "(" + ")" + "{" + StatementGroup +"}" |
+                                      "fn" + Identifier + "(" + FunctionDefinitionArgument + ")" + "{" + "}" |
+                                      "fn" + Identifier + "(" + FunctionDefinitionArgument + ")" + "{" + StatementGroup + "}";
 
             AssignmentStatement.Rule = Identifier + "=" + Expression + ";";
 

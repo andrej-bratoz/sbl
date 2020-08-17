@@ -10,7 +10,12 @@ namespace sbls
         {
             if (args.Length < 1) return;
             var file = args[0];
-            if(!File.Exists(file)) Console.WriteLine("Error! File " + args[0] + " does not exist. Exiting...");
+
+            if (!File.Exists(file))
+            {
+                Console.WriteLine($"Error! File '{args[0]}' does not exist. Exiting...");
+                return;
+            }
 
             var content = File.ReadAllText(file);
             var compiler = new SBLCompiler(); 
